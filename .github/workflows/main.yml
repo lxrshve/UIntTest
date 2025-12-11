@@ -1,21 +1,30 @@
-name: Run Unit Tests
+# Документация к файлу `.github/workflows/main.yml`
 
-on: [push, pull_request]
+## Полный код с комментариями
+
+name: Run Unit Tests  # Название workflow, отображается в интерфейсе GitHub Actions
+
+on: [push, pull_request]  # Триггеры выполнения: запускается при push в любую ветку и при создании/обновлении pull request
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  test:  # Определение задания (job) с именем "test"
+    strategy:  # Стратегия выполнения с использованием матрицы
+      matrix:  # Матрица для параллельного запуска на разных ОС
+        os: [ubuntu-latest, windows-latest]  # Задание требует тестирования на Ubuntu и Windows
+    runs-on: ${{ matrix.os }}  # Динамический выбор runner'а из матрицы
     
-    steps:
-    - uses: actions/checkout@v3
+    steps:  # Последовательность шагов для выполнения
+    # Шаг 1: Получение кода из репозитория
+    - uses: actions/checkout@v3  # Клонирование репозитория на runner
     
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+    # Шаг 2: Настройка Python окружения
+    - name: Setup Python  # Имя шага (отображается в логах)
+      uses: actions/setup-python@v4  # Действие для установки Python
+      with:  # Параметры действия
+        python-version: '3.x'  # Использование последней стабильной версии Python 3
     
-    - name: Run tests
-      run: |
-        cd geometric_lib
-        python -m unittest discover -v
-
+    # Шаг 3: Запуск unit-тестов
+    - name: Run tests  # Имя шага для запуска тестов
+      run: |  # Выполнение shell-команд
+        cd geometric_lib  # Переход в директорию с проектом
+        python -m unittest discover -v  # Запуск тестов с автоматическим обнаружением и подробным выводом
