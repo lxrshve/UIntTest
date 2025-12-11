@@ -1,7 +1,3 @@
-# Документация к файлу `.github/workflows/main.yml`
-
-## Полный код с комментариями
-
 name: Run Unit Tests  # Название workflow, отображается в интерфейсе GitHub Actions
 
 on: [push, pull_request]  # Триггеры выполнения: запускается при push в любую ветку и при создании/обновлении pull request
