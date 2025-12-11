@@ -7,16 +7,16 @@ import circle
 
 class TestRectangle(unittest.TestCase):
     def test_area_normal(self):
-        self.assertEqual(rectangle.area(5, 4), 20)  # 5 * 4 = 20
+        self.assertEqual(rectangle.area(5), math.pi * 25)  # 25 * pi
     
     def test_area_edge(self):
-        self.assertEqual(rectangle.area(0, 10), 0)  # 0 * 10 = 0
+        self.assertEqual(rectangle.area(0), 0)  # 0 * 0 * pi = 0
     
     def test_perimeter_normal(self):
-        self.assertEqual(rectangle.perimeter(5, 4), 18)  # 2*(5+4) = 18
+        self.assertEqual(rectangle.perimeter(5), 2 * math.pi * 5)  # 2 * pi * 5
     
     def test_perimeter_edge(self):
-        self.assertEqual(rectangle.perimeter(0, 5), 10)  # 2*(0+5) = 10
+        self.assertEqual(rectangle.perimeter(-10), 2 * math.pi *(-10))  # 2 * pi * -10
 
 class TestSquare(unittest.TestCase):
     def test_area_normal(self):
